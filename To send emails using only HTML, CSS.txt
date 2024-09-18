@@ -1,0 +1,96 @@
+To send emails using only HTML, CSS, and JavaScript without a backend, you can use a service like EmailJS. This allows you to send emails directly from the client-side JavaScript without needing a custom server.
+
+Steps to Send Emails Using EmailJS:
+Sign Up for EmailJS:
+
+Go to EmailJS, sign up for an account, and log in.
+Create an Email Service:
+
+After logging in, create a new email service with the service provider you want (e.g., Gmail, Outlook).
+You'll get a Service ID which you'll use in the code later.
+Create an Email Template:
+
+Go to the "Email Templates" section in your EmailJS dashboard.
+Create a new template with the variables matching your form fields (e.g., name, email, message).
+Install EmailJS JavaScript Library:
+
+Add the following script to your HTML file to include the EmailJS library:
+
+html
+Copy code
+<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "nDod7AjXN7c73uIJl",
+      });
+   })();
+</script>Add HTML Form:
+
+Add your form to the HTML file. You can keep the form you provided earlier. Just update it to have id attributes that you'll use for sending the data via JavaScript:
+
+html
+Copy code
+<form id="contactForm" class="contactform">
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <input type="text" name="name" id="name" placeholder="YOUR NAME">
+        </div>
+        <div class="col-12 col-md-4">
+            <input type="email" name="email" id="email" placeholder="YOUR EMAIL">
+        </div>
+        <div class="col-12 col-md-4">
+            <input type="text" name="subject" id="subject" placeholder="YOUR SUBJECT">
+        </div>
+        <div class="col-12">
+            <textarea name="message" id="message" placeholder="YOUR MESSAGE"></textarea>
+            <button type="submit" class="button">
+                <span class="button-text">Send Message</span>
+                <span class="button-icon fa fa-send"></span>
+            </button>
+        </div>
+        <div class="col-12 form-message">
+            <span class="output_message text-center font-weight-600 text-uppercase"></span>
+        </div>
+    </div>
+</form>
+JavaScript to Send the Email:
+
+Now you need to write JavaScript to capture the form submission and send the email using EmailJS:
+
+html
+Copy code
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting the traditional way
+
+        // Collect form data
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+
+        // Send the email using EmailJS
+        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+            name: name,
+            email: email,
+            subject: subject,
+            message: message
+        }).then(function(response) {
+            console.log("SUCCESS!", response.status, response.text);
+            document.querySelector('.output_message').innerText = "Message sent successfully!";
+        }, function(error) {
+            console.log("FAILED...", error);
+            document.querySelector('.output_message').innerText = "Failed to send message.";
+        });
+    });
+</script>
+What You'll Replace:
+YOUR_PUBLIC_KEY: Replace this with your EmailJS public key, which you can find in your EmailJS account under "API Keys".
+YOUR_SERVICE_ID: Replace this with the service ID from your EmailJS service.
+YOUR_TEMPLATE_ID: Replace this with the template ID you created in EmailJS.
+Explanation:
+The form data is collected using getElementById() for each field.
+emailjs.send() is used to send the email, passing the Service ID, Template ID, and the form data.
+Success and failure callbacks are used to notify the user whether the message was sent successfully or not.
+By using EmailJS, you can avoid needing a server or backend logic for sending emails directly from your HTML, CSS, and JavaScript files.
