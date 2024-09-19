@@ -248,6 +248,7 @@
             subject: subject,
             message: message
         }).then(function(response) {
+            console.log(response)
             console.log("SUCCESS!", response.status, response.text);
             document.querySelector('.output_message').innerText = "Message sent successfully!";
         }, function(error) {
