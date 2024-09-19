@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -21,13 +21,19 @@
     <link href="css/style.css" rel="stylesheet">
 
     <!-- CSS Skin File -->
+    <!-- <link href="css/skins/yellow.css" rel="stylesheet"> -->
 
     <!-- Live Style Switcher - demo only -->
     <link rel="alternate stylesheet" type="text/css" title="blue" href="./css/skins/blue.css">
     <link rel="alternate stylesheet" type="text/css" title="green" href="./css/skins/green.css">
+    <!-- <link rel="alternate stylesheet" type="text/css" title="yellow" href="./css/skins/yellow.css"> -->
     <link rel="alternate stylesheet" type="text/css" title="blueviolet" href="./css/skins/blueviolet.css">
     <link rel="alternate stylesheet" type="text/css" title="goldenrod" href="./css/skins/goldenrod.css">
+    <!-- <link rel="alternate stylesheet" type="text/css" title="magenta" href="./css/skins/magenta.css"> -->
+    <!-- <link rel="alternate stylesheet" type="text/css" title="orange" href="./css/skins/orange.css"> -->
     <link rel="alternate stylesheet" type="text/css" title="purple" href="./css/skins/purple.css">
+    <!-- <link rel="alternate stylesheet" type="text/css" title="red" href="./css/skins/red.css"> -->
+    <!-- <link rel="alternate stylesheet" type="text/css" title="yellowgreen" href="./css/skins/yellowgreen.css"> -->
     <link rel="stylesheet" type="text/css" href="css/styleswitcher.css">
 
     <!-- Modernizr JS File -->
@@ -232,7 +238,11 @@
         const message = document.getElementById('message').value;
 
         // Send the email using EmailJS
-        emailjs.send("service_qopijef", "template_7v0g7ag", {
+        if(name == null || name == "" || email == null || email == "" || subject==null|| subject=="" || message==null || message==""){
+            alert("All Fields are required");
+        }
+        else{
+            emailjs.send("service_qopijef", "template_7v0g7ag", {
             name: name,
             email: email,
             subject: subject,
@@ -244,6 +254,8 @@
             console.log("FAILED...", error);
             document.querySelector('.output_message').innerText = "Failed to send message.";
         });
+        }
+       
     });
 </script>
 
