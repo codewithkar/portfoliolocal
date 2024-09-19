@@ -247,14 +247,16 @@
             email: email,
             subject: subject,
             message: message
-        }).then(function(response) {
-            console.log(response)
-            console.log("SUCCESS!", response.status, response.text);
+        }).then(
+        (response) => {
+            console.log('SUCCESS!', response.status, response.text);
             document.querySelector('.output_message').innerText = "Message sent successfully!";
-        }, function(error) {
-            console.log("FAILED...", error);
+        },
+        (error) => {
+            console.log('FAILED...', error);
             document.querySelector('.output_message').innerText = "Failed to send message.";
-        });
+        }
+        );
         }
        
     });
